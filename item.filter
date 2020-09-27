@@ -4,6 +4,17 @@
 //
 // For Casual and EndGame Players
 
+// Changes compared to Kryszard's original
+// - no normal keys
+// - no antidotes after clvl 80
+// - no id scrolls after clvl 80
+// - no chipped gems after clvl 18
+// - rare arrows and bolts after clvl 80
+// - druid, barbarian, sorc class specific magic items and magic wands removed after clvl 40 
+// - no magic scepters
+// - no magic rings if ilvl < 91 and clvl > 40
+// - added +6 blade shield claw to buyable items
+
 //Gold
 ItemDisplay[GOLD<100 CLVL<20]:
 ItemDisplay[GOLD<1000 (CLVL>19 AND CLVL<80)]:
@@ -35,13 +46,15 @@ ItemDisplay[(hp4 OR mp4) DIFFICULTY>1]:
 
 //Utilites
 ItemDisplay[tsc]: %BLUE%°%GRAY%tp
-ItemDisplay[isc]: %RED%°%GRAY%id
+ItemDisplay[isc CLVL<81]: %RED%°%GRAY%tp
+ItemDisplay[isc CLVL>80]:
 ItemDisplay[vps CLVL<41]: %GREEN%!%WHITE%stamina
 ItemDisplay[vps CLVL>40]:
 ItemDisplay[wms CLVL<61]: %GREEN%!%WHITE%thaw
 ItemDisplay[wms CLVL>60]:
-ItemDisplay[yps]: %GREEN%!%WHITE%a
-ItemDisplay[key]: %GRAY%key
+ItemDisplay[yps CLVL<81]: %GREEN%!%WHITE%A
+ItemDisplay[yps CLVL>80]:
+ItemDisplay[key]:
 //Choking, Exploding, Fulminating, Oil, Rancid, Strangling
 ItemDisplay[(gpm OR opm OR opl OR ops OR gps OR gpl) CLVL>23]:
 
@@ -78,7 +91,7 @@ ItemDisplay[r30 OR r31]: %GREEN%[%RUNENUM%] %PURPLE%»»»» »»  »»    »   
 ItemDisplay[(gfv OR gfw OR gfg OR gfr OR gfb OR gfy OR skf) DIFFICULTY>0]:
 ItemDisplay[(gsv OR gsw OR gsg OR gsr OR gsb OR gsy OR sku) DIFFICULTY>1]:
 ItemDisplay[(gcv OR gcw OR gcg OR gcr OR gcb OR gcy OR skc) CLVL<19]: %NAME%
-ItemDisplay[(gcv OR gcw OR gcg OR gcr OR gcb OR gcy OR skc)]: %GRAY%chip
+ItemDisplay[(gcv OR gcw OR gcg OR gcr OR gcb OR gcy OR skc) CLVL>18]:
 ItemDisplay[gzv]: %WHITE%Amethyst %ORANGE%[%PURPLE%O%ORANGE%]
 ItemDisplay[glw]: %WHITE%Diamond %ORANGE%[%WHITE%O%ORANGE%]
 ItemDisplay[glg]: %WHITE%Emerald %ORANGE%[%GREEN%O%ORANGE%]
@@ -98,9 +111,11 @@ ItemDisplay[skz]: %ORANGE%P %WHITE%Skull %ORANGE%[%GRAY%O%ORANGE%]
 ItemDisplay[aqv CLVL>12]:
 ItemDisplay[aq2 NMAG CLVL>12]:
 ItemDisplay[aq2 MAG CLVL>40]:
+ItemDisplay[aq2 RARE CLVL>80]:
 ItemDisplay[cqv CLVL>12]:
 ItemDisplay[cq2 NMAG CLVL>12]:
 ItemDisplay[cq2 MAG CLVL>40]:
+ItemDisplay[cq2 RARE CLVL>80]:
 
 //Criclets
 ItemDisplay[EQ7 MAG ETH]: %GRAY%ETH %BLUE%%NAME%
@@ -110,13 +125,16 @@ ItemDisplay[EQ7 (MAG OR RARE)]: %NAME%
 ItemDisplay[ci3 NMAG !ETH SOCK=0]: %NAME% %YELLOW%[%GRAY%imbue%YELLOW%]
 
 //Class items
-ItemDisplay[(CL1 OR CL2 OR CL5 OR CL6 OR WP12) MAG ETH]: %GRAY%ETH %BLUE%%NAME%
-ItemDisplay[(CL1 OR CL2 OR CL5 OR CL6 OR WP12) RARE ETH]: %GRAY%ETH %YELLOW%%NAME%
-ItemDisplay[(CL1 OR CL2 OR CL5 OR CL6 OR WP12) (MAG OR RARE)]: %NAME%
+ItemDisplay[CL5 MAG ETH]: %GRAY%ETH %BLUE%%NAME%
+ItemDisplay[CL5 MAG]: %NAME%
+ItemDisplay[(CL1 OR CL2 OR CL6 OR WP12) MAG ETH CLVL>40]:
+ItemDisplay[(CL1 OR CL2 OR CL6 OR WP12) RARE ETH]: %GRAY%ETH %YELLOW%%NAME%
+ItemDisplay[(CL1 OR CL2 OR CL6 OR WP12) MAG CLVL>40]:
+ItemDisplay[(CL1 OR CL2 OR CL6 OR WP12) RARE]: %NAME%
 ItemDisplay[WEAPON (WP6 AND CL7) MAG ETH]: %GRAY%ETH %BLUE%%NAME%
 ItemDisplay[WEAPON (WP6 AND CL7) RARE ETH]: %GRAY%ETH %YELLOW%%NAME%
 ItemDisplay[WEAPON (WP6 AND CL7) (MAG OR RARE)]: %NAME%
-ItemDisplay[(wsp OR 9ws OR 7ws) (MAG OR RARE) !ETH]: %NAME%
+ItemDisplay[(wsp OR 9ws OR 7ws) RARE !ETH]: %NAME%
 
 //Good Charms
 ItemDisplay[cm3 (ITEMSTAT22>6 AND LIFE>0)]: %TAN%Max Dmg %RED%Life %BLUE%Grand Charm %GRAY%[%ILVL%]
@@ -237,8 +255,9 @@ ItemDisplay[cm1 OR cm2 OR cm3]: %NAME% %GRAY%[%ILVL%]
 
 //Rings and amulets
 ItemDisplay[(rin OR amu) RARE !ID]: %TAN%»» %YELLOW%%NAME%%TAN% ««
-ItemDisplay[(ring OR amu) MAG ILVL>90]: %NAME% %WHITE%[%ILVL%]
-ItemDisplay[(ring OR amu) MAG]: %NAME% %GRAY%[%ILVL%]
+ItemDisplay[(rin OR amu) MAG ILVL>90]: %NAME% %WHITE%[%ILVL%]
+ItemDisplay[amu MAG]: %NAME% %GRAY%[%ILVL%]
+ItemDisplay[rin MAG CLVL>40]: 
 
 //Jewels
 ItemDisplay[jew MAG !ID]: %TAN%»%WHITE%» %BLUE%%NAME%%WHITE% «%TAN%«
@@ -257,10 +276,11 @@ ItemDisplay[uit MAG]: %NAME% %GREEN%[nef] %GRAY%[%ILVL%]
 ItemDisplay[(EQ4 OR EQ5 OR EQ6) ETH RARE]: %GRAY%ETH %YELLOW%%NAME%
 ItemDisplay[(EQ4 OR EQ5 OR EQ6) RARE]: %NAME%
 
-//+3bo weapons and +3/20 gloves and +6foh scpeters
+//+3bo weapons and +3/20 gloves and +6foh scpeters and +6 bs claw
 ItemDisplay[WEAPON TABSK34>2]: %RED%»» »» »» %GREEN%3bo weapon%RED% «« «« ««
 ItemDisplay[EQ4 (TABSK0>2 OR TABSK2>2 OR TABSK50>2) AND IAS>19]: %RED%»» »» »» %GREEN%3/20 Gloves%RED% «« «« ««
 ItemDisplay[WP13 (TABSK24>2 AND SK119>2)]: %RED%»» »» »» %GREEN%FoH Scepter%RED% «« «« ««
+ItemDisplay[CL5 (TABSK48>2 AND SK277>2)]: %RED%»» »» »» %GREEN%BS Claw%RED% «« «« ««
 
 //OK UNIQUE Items
 //belts
