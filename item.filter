@@ -46,7 +46,7 @@ ItemDisplay[(hp4 OR mp4) DIFFICULTY>1]:
 
 //Utilites
 ItemDisplay[tsc]: %BLUE%°%GRAY%tp
-ItemDisplay[isc CLVL<81]: %RED%°%GRAY%tp
+ItemDisplay[isc CLVL<81]: %RED%°%GRAY%id
 ItemDisplay[isc CLVL>80]:
 ItemDisplay[vps CLVL<41]: %GREEN%!%WHITE%stamina
 ItemDisplay[vps CLVL>40]:
